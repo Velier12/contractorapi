@@ -19,6 +19,8 @@ import java.security.Timestamp;
         @Id
         private String id;
         private String parentId;
+
+        @Column(nullable = false)
         private String name;
         private String nameFull;
         private String inn;
@@ -36,7 +38,7 @@ import java.security.Timestamp;
         @JoinColumn(name = "org_form", referencedColumnName = "id")
         private OrgForm orgForm;
 
-        @Column(name = "is_active")
+        @Column(name = "is_active", nullable = false)
         private boolean isActive = true;
 
         @Column(name = "create_date", nullable = false, updatable = false)

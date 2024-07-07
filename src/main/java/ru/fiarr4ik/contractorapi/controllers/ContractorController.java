@@ -17,8 +17,12 @@ import ru.fiarr4ik.contractorapi.services.ContractorService;
     @RequestMapping("/contractor")
     public class ContractorController {
 
+        private final ContractorService contractorService;
+
         @Autowired
-        private ContractorService contractorService;
+        public ContractorController(ContractorService contractorService) {
+            this.contractorService = contractorService;
+        }
 
         @PutMapping("/save")
         public ResponseEntity<Contractor> saveContractor(@RequestBody Contractor contractor) {

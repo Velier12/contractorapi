@@ -7,8 +7,13 @@ import ru.fiarr4ik.contractorapi.repos.ContractorRepository;
 
     @Service
     public class ContractorService {
+
+        private final ContractorRepository contractorRepository;
+
         @Autowired
-        private ContractorRepository contractorRepository;
+        public ContractorService(ContractorRepository contractorRepository) {
+            this.contractorRepository = contractorRepository;
+        }
 
         public Contractor saveContractor(Contractor contractor) {
             return contractorRepository.save(contractor);
