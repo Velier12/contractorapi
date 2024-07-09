@@ -24,7 +24,7 @@ import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
             return mappingService.convertToDto(savedOrgForm);
         }
 
-        public OrgFormDTO findOrgFormById(int id) {
+        public OrgFormDTO getOrgFormById(int id) {
             OrgForm orgForm = orgFormRepository.findById(id).orElse(null);
             if (orgForm.getIsActive()) {
                 return mappingService.convertToDto(orgForm);

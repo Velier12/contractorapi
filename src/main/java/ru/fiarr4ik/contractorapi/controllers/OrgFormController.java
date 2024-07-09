@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import ru.fiarr4ik.contractorapi.dto.OrgFormDTO;
-import ru.fiarr4ik.contractorapi.entityes.OrgForm;
 import ru.fiarr4ik.contractorapi.services.OrgFormService;
 
     @RestController
@@ -32,7 +31,7 @@ import ru.fiarr4ik.contractorapi.services.OrgFormService;
 
         @GetMapping("/{id}")
         public ResponseEntity<OrgFormDTO> getOrgForm(@PathVariable int id) {
-            return new ResponseEntity<>(orgFormService.findOrgFormById(id), HttpStatus.OK);
+            return new ResponseEntity<>(orgFormService.getOrgFormById(id), HttpStatus.OK);
         }
 
         @DeleteMapping("/delete/{id}")
