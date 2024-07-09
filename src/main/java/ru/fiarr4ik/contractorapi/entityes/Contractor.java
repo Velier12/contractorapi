@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -39,7 +40,12 @@ import java.security.Timestamp;
         private OrgForm orgForm;
 
         @Column(name = "is_active", nullable = false)
-        private boolean isActive = true;
+        private boolean isActive;
+
+        @PrePersist
+        protected void onCreate() {
+            this.isActive = true;
+        }
 
         @Column(name = "create_date", nullable = false, updatable = false)
         @CreationTimestamp

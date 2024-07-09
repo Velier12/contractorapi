@@ -14,7 +14,7 @@ import ru.fiarr4ik.contractorapi.entityes.Industry;
 import ru.fiarr4ik.contractorapi.services.IndustryService;
 
     @RestController
-    @RequestMapping("/country")
+    @RequestMapping("/industry")
     public class IndustryController {
 
         private final IndustryService industryService;

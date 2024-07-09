@@ -3,15 +3,29 @@ package ru.fiarr4ik.contractorapi.entityes;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
 
     @Entity
     @Data
+    @Table(name = "industry")
     public class Industry {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
+        @Column(name = "id")
+        private Long id;
+
+        @Column(name = "name")
         private String name;
-        private boolean isActive = true;
+
+        @Column(name = "is_active")
+        private boolean isActive;
+
+        @PrePersist
+        protected void onCreate() {
+            this.isActive = true;
+        }
     }

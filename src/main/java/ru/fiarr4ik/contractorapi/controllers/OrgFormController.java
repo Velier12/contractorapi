@@ -14,7 +14,7 @@ import ru.fiarr4ik.contractorapi.entityes.OrgForm;
 import ru.fiarr4ik.contractorapi.services.OrgFormService;
 
     @RestController
-    @RequestMapping("/orgForm")
+    @RequestMapping("/org-form")
     public class OrgFormController {
 
         private final OrgFormService orgFormService;
@@ -29,7 +29,7 @@ import ru.fiarr4ik.contractorapi.services.OrgFormService;
             return new ResponseEntity<>(orgFormService.saveOrgForm(orgForm), HttpStatus.OK);
         }
 
-        @GetMapping("{/id}")
+        @GetMapping("/{id}")
         public ResponseEntity<OrgForm> getOrgForm(@PathVariable int id) {
             return new ResponseEntity<>(orgFormService.findOrgFormById(id), HttpStatus.OK);
         }
