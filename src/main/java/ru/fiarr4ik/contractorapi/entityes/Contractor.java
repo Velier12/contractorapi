@@ -42,8 +42,20 @@ import java.security.Timestamp;
         @Column(name = "is_active", nullable = false)
         private boolean isActive;
 
-        @PrePersist
-        protected void onCreate() {
+        public Contractor(OrgForm orgForm, Industry industry, Country country, String ogrn, String inn, String nameFull, String name, String parentId, String id) {
+            this.orgForm = orgForm;
+            this.industry = industry;
+            this.country = country;
+            this.ogrn = ogrn;
+            this.inn = inn;
+            this.nameFull = nameFull;
+            this.name = name;
+            this.parentId = parentId;
+            this.id = id;
+            this.isActive = true;
+        }
+
+        public Contractor() {
             this.isActive = true;
         }
 

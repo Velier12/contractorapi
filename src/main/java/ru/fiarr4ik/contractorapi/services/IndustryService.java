@@ -2,6 +2,7 @@ package ru.fiarr4ik.contractorapi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.fiarr4ik.contractorapi.dto.IndustryDTO;
 import ru.fiarr4ik.contractorapi.entityes.Industry;
 import ru.fiarr4ik.contractorapi.repos.IndustryRepository;
 
@@ -9,18 +10,27 @@ import ru.fiarr4ik.contractorapi.repos.IndustryRepository;
     public class IndustryService {
 
         private final IndustryRepository industryRepository;
+        private final MappingService mappingService;
 
         @Autowired
-        public IndustryService(IndustryRepository industryRepository) {
+        public IndustryService(IndustryRepository industryRepository, MappingService mappingService) {
             this.industryRepository = industryRepository;
+            this.mappingService = mappingService;
         }
 
-        public Industry saveIndustry(Industry industry) {
-            return industryRepository.save(industry);
+        public IndustryDTO saveIndustry(IndustryDTO industryDTO) {
+            Industry industry = mappingService.convertToEntity(industryDTO);
+            Industry savedIndustry = industryRepository.save(industry);
+            return mappingService.convertToDto(savedIndustry);
         }
 
-        public Industry getIndustryById(int id) {
-            return industryRepository.findById(id).orElse(null);
+        public IndustryDTO getIndustryById(int id) {
+            Industry industry = industryRepository.findById(id).orElse(null);
+            if (industry.getIsActive()) {
+                return mappingService.convertToDto(industry);
+            } else {
+                return null;
+            }
         }
 
         public void  deleteIndustry(int id) {

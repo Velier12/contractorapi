@@ -18,11 +18,6 @@ import ru.fiarr4ik.contractorapi.repos.CountryRepository;
             this.mappingService = mappingService;
         }
 
-        public void addCountry(String id, String name) {
-            Country country = new Country(id, name);
-            countryRepository.save(country);
-        }
-
         public CountryDTO saveCountry(CountryDTO countryDTO) {
             Country country = mappingService.convertToEntity(countryDTO);
             Country savedCountry = countryRepository.save(country);
