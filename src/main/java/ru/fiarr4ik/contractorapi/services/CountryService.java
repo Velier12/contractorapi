@@ -2,6 +2,7 @@ package ru.fiarr4ik.contractorapi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.fiarr4ik.contractorapi.dto.CountryDTO;
 import ru.fiarr4ik.contractorapi.entityes.Country;
 import ru.fiarr4ik.contractorapi.repos.CountryRepository;
 
@@ -9,18 +10,27 @@ import ru.fiarr4ik.contractorapi.repos.CountryRepository;
     public class CountryService {
 
         private final CountryRepository countryRepository;
+        private final MappingService mappingService;
 
         @Autowired
-        public CountryService(CountryRepository countryRepository) {
+        public CountryService(CountryRepository countryRepository, MappingService mappingService) {
             this.countryRepository = countryRepository;
+            this.mappingService = mappingService;
         }
 
-        public Country saveCountry(Country country) {
-            return countryRepository.save(country);
+        public CountryDTO saveCountry(CountryDTO countryDTO) {
+            Country country = mappingService.convertToEntity(countryDTO);
+            Country savedCountry = countryRepository.save(country);
+            return mappingService.convertToDto(savedCountry);
         }
 
-        public Country getCountryById(String id) {
-            return countryRepository.findById(id).orElse(null);
+        public CountryDTO getCountryById(String id) {
+            Country country = countryRepository.findById(id).orElse(null);
+            if (country.getIsActive()) {
+                return mappingService.convertToDto(country);
+            } else {
+                return null;
+            }
         }
 
         public void deleteContractor(String id) {

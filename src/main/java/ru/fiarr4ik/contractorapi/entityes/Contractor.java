@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -39,7 +40,24 @@ import java.security.Timestamp;
         private OrgForm orgForm;
 
         @Column(name = "is_active", nullable = false)
-        private boolean isActive = true;
+        private boolean isActive;
+
+        public Contractor(OrgForm orgForm, Industry industry, Country country, String ogrn, String inn, String nameFull, String name, String parentId, String id) {
+            this.orgForm = orgForm;
+            this.industry = industry;
+            this.country = country;
+            this.ogrn = ogrn;
+            this.inn = inn;
+            this.nameFull = nameFull;
+            this.name = name;
+            this.parentId = parentId;
+            this.id = id;
+            this.isActive = true;
+        }
+
+        public Contractor() {
+            this.isActive = true;
+        }
 
         @Column(name = "create_date", nullable = false, updatable = false)
         @CreationTimestamp

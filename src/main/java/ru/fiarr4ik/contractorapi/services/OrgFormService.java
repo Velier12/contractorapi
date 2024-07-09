@@ -2,6 +2,7 @@ package ru.fiarr4ik.contractorapi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.fiarr4ik.contractorapi.dto.OrgFormDTO;
 import ru.fiarr4ik.contractorapi.entityes.OrgForm;
 import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
 
@@ -9,18 +10,27 @@ import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
     public class OrgFormService {
 
         private final OrgFormRepository orgFormRepository;
+        private final MappingService mappingService;
 
         @Autowired
-        public OrgFormService(OrgFormRepository orgFormRepository) {
+        public OrgFormService(OrgFormRepository orgFormRepository, MappingService mappingService) {
             this.orgFormRepository = orgFormRepository;
+            this.mappingService = mappingService;
         }
 
-        public OrgForm saveOrgForm(OrgForm orgForm) {
-            return orgFormRepository.save(orgForm);
+        public OrgFormDTO saveOrgForm(OrgFormDTO orgFormDTO) {
+            OrgForm orgForm = mappingService.convertToEntity(orgFormDTO);
+            OrgForm savedOrgForm = orgFormRepository.save(orgForm);
+            return mappingService.convertToDto(savedOrgForm);
         }
 
-        public OrgForm findOrgFormById(int id) {
-            return orgFormRepository.findById(id).orElse(null);
+        public OrgFormDTO getOrgFormById(int id) {
+            OrgForm orgForm = orgFormRepository.findById(id).orElse(null);
+            if (orgForm.getIsActive()) {
+                return mappingService.convertToDto(orgForm);
+            } else {
+                return null;
+            }
         }
 
         public void deleteOrgForm(int id) {

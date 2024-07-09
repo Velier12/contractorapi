@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import ru.fiarr4ik.contractorapi.entityes.Industry;
+import ru.fiarr4ik.contractorapi.dto.IndustryDTO;
 import ru.fiarr4ik.contractorapi.services.IndustryService;
 
     @RestController
-    @RequestMapping("/country")
+    @RequestMapping("/industry")
     public class IndustryController {
 
         private final IndustryService industryService;
@@ -25,12 +25,12 @@ import ru.fiarr4ik.contractorapi.services.IndustryService;
         }
 
         @PutMapping("/save")
-        public ResponseEntity<Industry> saveIndustry(@RequestBody Industry industry) {
-            return new ResponseEntity<>(industryService.saveIndustry(industry), HttpStatus.OK);
+        public ResponseEntity<IndustryDTO> saveIndustry(@RequestBody IndustryDTO industryDTO) {
+            return new ResponseEntity<>(industryService.saveIndustry(industryDTO), HttpStatus.OK);
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<Industry> getIndustry(@PathVariable int id) {
+        public ResponseEntity<IndustryDTO> getIndustry(@PathVariable int id) {
             return new ResponseEntity<>(industryService.getIndustryById(id), HttpStatus.OK);
         }
 
