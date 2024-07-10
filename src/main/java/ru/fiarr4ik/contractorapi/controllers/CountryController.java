@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import ru.fiarr4ik.contractorapi.dto.CountryDTO;
 import ru.fiarr4ik.contractorapi.services.CountryService;
 
-    @RestController
+import java.util.List;
+
+@RestController
     @RequestMapping("/country")
     public class CountryController {
 
@@ -36,8 +38,14 @@ import ru.fiarr4ik.contractorapi.services.CountryService;
 
         @DeleteMapping("/delete/{id}")
         public ResponseEntity<Void> deleteCountry(@PathVariable String id) {
-            countryService.deleteContractor(id);
+            countryService.deleteCountry(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        @GetMapping("/all")
+        public ResponseEntity<List<CountryDTO>> getAllCountries() {
+            List<CountryDTO> countries = countryService.getAllCountries();
+            return new ResponseEntity<>(countries, HttpStatus.OK);
         }
 
     }

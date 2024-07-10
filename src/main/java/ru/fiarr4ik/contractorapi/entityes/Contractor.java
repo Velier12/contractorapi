@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Column;
-import jakarta.persistence.PrePersist;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -66,4 +65,8 @@ import java.security.Timestamp;
         @Column(name = "modify_date")
         @UpdateTimestamp
         private Timestamp modifyDate;
+
+        public boolean getIsActive() {
+            return isActive;
+        }
     }

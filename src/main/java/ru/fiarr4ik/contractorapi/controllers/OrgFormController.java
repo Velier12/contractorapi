@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import ru.fiarr4ik.contractorapi.dto.OrgFormDTO;
 import ru.fiarr4ik.contractorapi.services.OrgFormService;
 
-    @RestController
+import java.util.List;
+
+@RestController
     @RequestMapping("/org-form")
     public class OrgFormController {
 
@@ -38,5 +40,11 @@ import ru.fiarr4ik.contractorapi.services.OrgFormService;
         public ResponseEntity<Void> deleteOrgForm(@PathVariable int id) {
             orgFormService.deleteOrgForm(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        @GetMapping("/all")
+        public ResponseEntity<List<OrgFormDTO>> getAllOrgForm() {
+            List<OrgFormDTO> orgForms = orgFormService.getAllOrgForm();
+            return new ResponseEntity<>(orgForms, HttpStatus.OK);
         }
     }

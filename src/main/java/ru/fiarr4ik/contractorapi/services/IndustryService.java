@@ -6,6 +6,9 @@ import ru.fiarr4ik.contractorapi.dto.IndustryDTO;
 import ru.fiarr4ik.contractorapi.entityes.Industry;
 import ru.fiarr4ik.contractorapi.repos.IndustryRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
     public class IndustryService {
 
@@ -39,5 +42,13 @@ import ru.fiarr4ik.contractorapi.repos.IndustryRepository;
                 industry.setActive(false);
                 industryRepository.save(industry);
             }
+        }
+
+        public List<IndustryDTO> getAllIndustry() {
+            List<Industry> industries = industryRepository.findAll();
+            return industries.stream()
+                    .filter(Industry::getIsActive)
+                    .map(mappingService::convertToDto)
+                    .collect(Collectors.toList());
         }
     }

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import ru.fiarr4ik.contractorapi.dto.IndustryDTO;
 import ru.fiarr4ik.contractorapi.services.IndustryService;
 
-    @RestController
+import java.util.List;
+
+@RestController
     @RequestMapping("/industry")
     public class IndustryController {
 
@@ -38,5 +40,11 @@ import ru.fiarr4ik.contractorapi.services.IndustryService;
         public ResponseEntity<Void> deleteIndustry(@PathVariable int id) {
             industryService.deleteIndustry(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        @GetMapping("/all")
+        public ResponseEntity<List<IndustryDTO>> getAllIndustryes() {
+            List<IndustryDTO> industryes = industryService.getAllIndustry();
+            return new ResponseEntity<>(industryes, HttpStatus.OK);
         }
     }

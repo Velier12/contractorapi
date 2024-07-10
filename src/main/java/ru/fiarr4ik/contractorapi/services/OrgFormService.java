@@ -6,6 +6,9 @@ import ru.fiarr4ik.contractorapi.dto.OrgFormDTO;
 import ru.fiarr4ik.contractorapi.entityes.OrgForm;
 import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
     public class OrgFormService {
 
@@ -39,5 +42,13 @@ import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
                 orgForm.setActive(false);
                 orgFormRepository.save(orgForm);
             }
+        }
+
+        public List<OrgFormDTO> getAllOrgForm() {
+            List<OrgForm> orgForms = orgFormRepository.findAll();
+            return orgForms.stream()
+                    .filter(OrgForm::getIsActive)
+                    .map(mappingService::convertToDto)
+                    .collect(Collectors.toList());
         }
     }

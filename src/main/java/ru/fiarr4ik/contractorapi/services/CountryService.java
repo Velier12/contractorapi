@@ -6,6 +6,9 @@ import ru.fiarr4ik.contractorapi.dto.CountryDTO;
 import ru.fiarr4ik.contractorapi.entityes.Country;
 import ru.fiarr4ik.contractorapi.repos.CountryRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
     public class CountryService {
 
@@ -33,11 +36,19 @@ import ru.fiarr4ik.contractorapi.repos.CountryRepository;
             }
         }
 
-        public void deleteContractor(String id) {
+        public void deleteCountry(String id) {
             Country country = countryRepository.findById(id).orElse(null);
             if (country != null) {
                 country.setActive(false);
                 countryRepository.save(country);
             }
+        }
+
+        public List<CountryDTO> getAllCountries() {
+            List<Country> countries = countryRepository.findAll();
+            return countries.stream()
+                    .filter(Country::getIsActive)
+                    .map(mappingService::convertToDto)
+                    .collect(Collectors.toList());
         }
     }
