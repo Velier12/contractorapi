@@ -15,7 +15,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 version = "0.0.1",
                 contact = @Contact(
                         name = "Fiarr4ikDev",
-                        email = "fiarr4ikdev@gmail.com"
+                        email = "fiarr4ikdev@gmail.com",
+                        url = """
+                                https://t.me/fiarr4ikdev"""
                 )
         )
 )
