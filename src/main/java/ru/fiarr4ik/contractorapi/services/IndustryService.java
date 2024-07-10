@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
         public IndustryDTO getIndustryById(int id) {
             Industry industry = industryRepository.findById(id).orElse(null);
+            assert industry != null;
             if (industry.getIsActive()) {
                 return mappingService.convertToDto(industry);
             } else {

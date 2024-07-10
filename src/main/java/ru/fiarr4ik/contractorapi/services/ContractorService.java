@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
         public ContractorDTO getContractorById(String id) {
             Contractor contractor = contractorRepository.findById(id).orElse(null);
+            assert contractor != null;
             if (contractor.getIsActive()) {
                 return mappingService.convertToDto(contractor);
             } else {

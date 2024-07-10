@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
         public OrgFormDTO getOrgFormById(int id) {
             OrgForm orgForm = orgFormRepository.findById(id).orElse(null);
+            assert orgForm != null;
             if (orgForm.getIsActive()) {
                 return mappingService.convertToDto(orgForm);
             } else {

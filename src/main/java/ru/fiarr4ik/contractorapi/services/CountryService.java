@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
         public CountryDTO getCountryById(String id) {
             Country country = countryRepository.findById(id).orElse(null);
+            assert country != null;
             if (country.getIsActive()) {
                 return mappingService.convertToDto(country);
             } else {
