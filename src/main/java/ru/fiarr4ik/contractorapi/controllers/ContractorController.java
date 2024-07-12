@@ -1,5 +1,6 @@
 package ru.fiarr4ik.contractorapi.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import ru.fiarr4ik.contractorapi.services.ContractorService;
 
 import java.util.List;
 
-@RestController
+    @RestController
     @RequestMapping("/contractor")
     public class ContractorController {
 
@@ -26,22 +27,26 @@ import java.util.List;
             this.contractorService = contractorService;
         }
 
+        @Operation(summary = "Сохранить контрагента")
         @PutMapping("/save")
         public ResponseEntity<ContractorDTO> saveContractor(@RequestBody ContractorDTO contractorDTO) {
             return new ResponseEntity<>(contractorService.saveContractor(contractorDTO), HttpStatus.OK);
         }
 
+        @Operation(summary = "Получение контрагента по id")
         @GetMapping("/{id}")
         public ResponseEntity<ContractorDTO> getContractor(@PathVariable String id) {
             return new ResponseEntity<>(contractorService.getContractorById(id), HttpStatus.OK);
         }
 
+        @Operation(summary = "Логическое удаление контрагента по id")
         @DeleteMapping("/delete/{id}")
         public ResponseEntity<Void> deleteContractor(@PathVariable String id) {
             contractorService.deleteContractor(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
+        @Operation(summary = "Вывод всех активных контрагентов")
         @GetMapping("/all")
         public ResponseEntity<List<ContractorDTO>> getAllContractor() {
             List<ContractorDTO> contractors = contractorService.getAllContractor();

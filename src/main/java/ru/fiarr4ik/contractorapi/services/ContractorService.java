@@ -3,13 +3,16 @@ package ru.fiarr4ik.contractorapi.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.fiarr4ik.contractorapi.dto.ContractorDTO;
-import ru.fiarr4ik.contractorapi.entityes.Contractor;
+import ru.fiarr4ik.contractorapi.models.Contractor;
 import ru.fiarr4ik.contractorapi.repos.ContractorRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+    /**
+     * Сервис для работы с сущностью {@link Contractor}
+     */
+    @Service
     public class ContractorService {
 
         private final ContractorRepository contractorRepository;

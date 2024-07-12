@@ -3,13 +3,16 @@ package ru.fiarr4ik.contractorapi.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.fiarr4ik.contractorapi.dto.OrgFormDTO;
-import ru.fiarr4ik.contractorapi.entityes.OrgForm;
+import ru.fiarr4ik.contractorapi.models.OrgForm;
 import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+    /**
+     * Сервис для работы с сущностью {@link OrgForm}
+     */
+    @Service
     public class OrgFormService {
 
         private final OrgFormRepository orgFormRepository;

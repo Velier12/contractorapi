@@ -3,13 +3,16 @@ package ru.fiarr4ik.contractorapi.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.fiarr4ik.contractorapi.dto.CountryDTO;
-import ru.fiarr4ik.contractorapi.entityes.Country;
+import ru.fiarr4ik.contractorapi.models.Country;
 import ru.fiarr4ik.contractorapi.repos.CountryRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+    /**
+     * Сервис для работы с сущностью {@link Country}
+     */
+    @Service
     public class CountryService {
 
         private final CountryRepository countryRepository;

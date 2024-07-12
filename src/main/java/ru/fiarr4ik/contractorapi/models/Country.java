@@ -1,21 +1,22 @@
-package ru.fiarr4ik.contractorapi.entityes;
+package ru.fiarr4ik.contractorapi.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
-import jakarta.persistence.GenerationType;
 import lombok.Data;
 
+    /**
+     * Класс сущность стран
+     */
     @Entity
     @Data
-    @Table(name = "industry")
-    public class Industry {
+    @Table(name = "country")
+    public class Country {
+
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
-        private Long id;
+        private String id;
 
         @Column(name = "name")
         private String name;
@@ -23,12 +24,13 @@ import lombok.Data;
         @Column(name = "is_active")
         private boolean isActive;
 
-        public Industry(String name) {
+        public Country(String id, String name) {
+            this.id = id;
             this.name = name;
             this.isActive = true;
         }
 
-        public Industry() {
+        public Country() {
             this.isActive = true;
         }
 
