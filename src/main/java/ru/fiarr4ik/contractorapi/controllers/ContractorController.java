@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import ru.fiarr4ik.contractorapi.dto.ContractorDTO;
 import ru.fiarr4ik.contractorapi.services.ContractorService;
+import ru.fiarr4ik.springbootstarterauditlib.annotations.AuditLog;
+import ru.fiarr4ik.springbootstarterauditlib.enums.LogLevel;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ import java.util.List;
             this.contractorService = contractorService;
         }
 
+        @AuditLog(logLevel = LogLevel.INFO)
         @Operation(summary = "Сохранить контрагента")
         @PutMapping("/save")
         public ResponseEntity<ContractorDTO> saveContractor(@RequestBody ContractorDTO contractorDTO) {
