@@ -1,4 +1,4 @@
-package ru.fiarr4ik.contractorapi.entityes;
+package ru.fiarr4ik.contractorapi.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,10 +8,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
 
+/**
+ * Класс сущность промышленности
+ */
     @Entity
     @Data
-    @Table(name = "org_form")
-    public class OrgForm {
+    @Table(name = "industry")
+    public class Industry {
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
@@ -23,12 +27,12 @@ import lombok.Data;
         @Column(name = "is_active")
         private boolean isActive;
 
-        public OrgForm(String name) {
+        public Industry(String name) {
             this.name = name;
             this.isActive = true;
         }
 
-        public OrgForm() {
+        public Industry() {
             this.isActive = true;
         }
 

@@ -3,10 +3,16 @@ package ru.fiarr4ik.contractorapi.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.fiarr4ik.contractorapi.dto.OrgFormDTO;
-import ru.fiarr4ik.contractorapi.entityes.OrgForm;
+import ru.fiarr4ik.contractorapi.models.OrgForm;
 import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
 
-@Service
+import java.util.List;
+import java.util.stream.Collectors;
+
+    /**
+     * Сервис для работы с сущностью {@link OrgForm}
+     */
+    @Service
     public class OrgFormService {
 
         private final OrgFormRepository orgFormRepository;
@@ -26,6 +32,7 @@ import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
 
         public OrgFormDTO getOrgFormById(int id) {
             OrgForm orgForm = orgFormRepository.findById(id).orElse(null);
+            assert orgForm != null;
             if (orgForm.getIsActive()) {
                 return mappingService.convertToDto(orgForm);
             } else {
@@ -39,5 +46,13 @@ import ru.fiarr4ik.contractorapi.repos.OrgFormRepository;
                 orgForm.setActive(false);
                 orgFormRepository.save(orgForm);
             }
+        }
+
+        public List<OrgFormDTO> getAllOrgForm() {
+            List<OrgForm> orgForms = orgFormRepository.findAll();
+            return orgForms.stream()
+                    .filter(OrgForm::getIsActive)
+                    .map(mappingService::convertToDto)
+                    .collect(Collectors.toList());
         }
     }

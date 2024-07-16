@@ -3,10 +3,16 @@ package ru.fiarr4ik.contractorapi.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.fiarr4ik.contractorapi.dto.IndustryDTO;
-import ru.fiarr4ik.contractorapi.entityes.Industry;
+import ru.fiarr4ik.contractorapi.models.Industry;
 import ru.fiarr4ik.contractorapi.repos.IndustryRepository;
 
-@Service
+import java.util.List;
+import java.util.stream.Collectors;
+
+    /**
+     * Сервис для работы с сущностью {@link Industry}
+     */
+    @Service
     public class IndustryService {
 
         private final IndustryRepository industryRepository;
@@ -26,6 +32,7 @@ import ru.fiarr4ik.contractorapi.repos.IndustryRepository;
 
         public IndustryDTO getIndustryById(int id) {
             Industry industry = industryRepository.findById(id).orElse(null);
+            assert industry != null;
             if (industry.getIsActive()) {
                 return mappingService.convertToDto(industry);
             } else {
@@ -39,5 +46,13 @@ import ru.fiarr4ik.contractorapi.repos.IndustryRepository;
                 industry.setActive(false);
                 industryRepository.save(industry);
             }
+        }
+
+        public List<IndustryDTO> getAllIndustry() {
+            List<Industry> industries = industryRepository.findAll();
+            return industries.stream()
+                    .filter(Industry::getIsActive)
+                    .map(mappingService::convertToDto)
+                    .collect(Collectors.toList());
         }
     }
